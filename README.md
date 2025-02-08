@@ -48,8 +48,6 @@ json-server работает на порту **3000**. Адрес сервера
 
 Для запуска сервера необходимо ввести в консоль следующие команды:
 
-`npm i json-server`
-
 `json-server --watch public/data/seminars.json`
 
 Проверить работоспособность сервера можно с помощью desktop-версии **Postman**, выполнив GET запрос по адресу: http://localhost:3000/seminars

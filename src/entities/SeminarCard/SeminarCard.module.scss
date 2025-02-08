@@ -1,0 +1,110 @@
+@use '@/App/styles/mixins/fontMixins' as mixins;
+
+.seminarCard {
+    width: 100%;
+    padding: 32px 32px;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    gap: 32px;
+
+    border-radius: 24px;
+
+    -webkit-box-shadow: var(--shadow-card);
+    -moz-box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-card);
+
+    transition: all 0.3s ease-in-out;
+
+    .image {
+        border-radius: 24px;
+
+        cursor: pointer;
+
+        transition: scale 0.3s ease-in-out;
+
+        //  Click
+        &:active {
+            scale: 1.02;
+        }
+
+        //Hover
+        @media (hover: hover) {
+            &:hover {
+                scale: 1.02;
+            }
+        }
+    }
+
+    .textBlock {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 24px;
+
+        .title {
+            @include mixins.title;
+
+            display: flex;
+            gap: 4px;
+            align-items: start;
+
+            cursor: pointer;
+
+            transition: color 0.3s ease-in-out;
+
+            //  Click
+            &:active {
+                color: var(--color-primary);
+            }
+
+            //Hover
+            @media (hover: hover) {
+                &:hover {
+                    color: var(--color-primary);
+                }
+            }
+        }
+
+        .description {
+            @include mixins.description;
+        }
+
+        .datetimeBlock {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            &_date,
+            &_time {
+                padding: 12px 20px;
+
+                @include mixins.date;
+                color: var(--color-primary);
+
+                border-radius: 24px;
+
+                box-shadow:
+                    #ffffff1a -2px -2px 4px 0px inset,
+                    #00000080 2px 2px 4px 0px inset;
+            }
+        }
+    }
+
+    //  Click
+    &:active {
+        -webkit-box-shadow: 4px 4px 32px 0px var(--shadow-color) inset;
+        -moz-box-shadow: 4px 4px 32px 0px var(--shadow-color) inset;
+        box-shadow: 4px 4px 32px 0px var(--shadow-color) inset;
+    }
+
+    //Hover
+    @media (hover: hover) {
+        &:hover {
+            -webkit-box-shadow: 4px 4px 32px 0px var(--shadow-color) inset;
+            -moz-box-shadow: 4px 4px 32px 0px var(--shadow-color) inset;
+            box-shadow: 4px 4px 32px 0px var(--shadow-color) inset;
+        }
+    }
+}
