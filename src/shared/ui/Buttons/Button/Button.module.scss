@@ -1,0 +1,19 @@
+.button {
+    transition: all 0.3s ease-in-out;
+
+    //  Click
+    &:active {
+        scale: 1.05;
+    }
+
+    //Hover
+    @media (hover: hover) {
+        &:hover {
+            scale: 1.05;
+        }
+    }
+}
+
+html[data-theme='light'] .button {
+    filter: invert(100%);
+}

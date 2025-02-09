@@ -5,7 +5,7 @@
     padding: 32px 32px;
 
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2fr auto;
     grid-template-rows: 1fr;
     gap: 32px;
 
@@ -17,22 +17,27 @@
 
     transition: all 0.3s ease-in-out;
 
-    .image {
+    .imageBlock {
+        width: 100%;
+        max-height: 300px;
+
         border-radius: 24px;
 
-        cursor: pointer;
+        .image {
+            cursor: pointer;
 
-        transition: scale 0.3s ease-in-out;
+            transition: scale 0.3s ease-in-out;
 
-        //  Click
-        &:active {
-            scale: 1.02;
-        }
-
-        //Hover
-        @media (hover: hover) {
-            &:hover {
+            //  Click
+            &:active {
                 scale: 1.02;
+            }
+
+            //Hover
+            @media (hover: hover) {
+                &:hover {
+                    scale: 1.02;
+                }
             }
         }
     }
@@ -49,8 +54,6 @@
             display: flex;
             gap: 4px;
             align-items: start;
-
-            cursor: pointer;
 
             transition: color 0.3s ease-in-out;
 
@@ -90,6 +93,12 @@
                     #00000080 2px 2px 4px 0px inset;
             }
         }
+    }
+
+    .buttonsBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
     }
 
     //  Click

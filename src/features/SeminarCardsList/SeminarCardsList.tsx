@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import classNames from 'classnames';
+import Skeleton from 'react-loading-skeleton';
 
 import { getSeminars } from '@/features';
 import { SeminarCard } from '@/entities';
@@ -25,7 +26,7 @@ export const SeminarCardsList = (props: SeminarCardsListProps) => {
 
     console.log(seminars);
 
-    const cardAnimationVariants: Variants = {
+    const cardsAnimationVariants: Variants = {
         hidden: {
             y: 32,
             opacity: 0,
@@ -41,15 +42,15 @@ export const SeminarCardsList = (props: SeminarCardsListProps) => {
         <motion.ul
             className={classNames(styles.seminarCardsList, [className])}
             initial="hidden"
-            whileInView="visible"
+            animate="visible"
             viewport={{ amount: 0.2, once: true }}
         >
             {seminars.map((seminar, index) => {
                 return (
                     <motion.li
                         key={index}
-                        variants={cardAnimationVariants}
-                        custom={index + 1}
+                        variants={cardsAnimationVariants}
+                        custom={index + 4}
                     >
                         <SeminarCard seminar={seminar} />
                     </motion.li>

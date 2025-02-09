@@ -1,5 +1,6 @@
 @use 'scss-reset/reset';
 @use 'variables/globals';
+@use 'react-loading-skeleton/dist/skeleton.css';
 
 * {
     scrollbar-width: thin;

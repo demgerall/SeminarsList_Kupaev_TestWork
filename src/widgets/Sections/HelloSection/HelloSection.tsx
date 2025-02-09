@@ -25,6 +25,7 @@ export const HelloSection = (props: HelloSectionProps) => {
         toolsEnum.react_router,
         toolsEnum.react_hook_form,
         toolsEnum.framer_motion,
+        toolsEnum.skeleton,
     ];
 
     const textAnimationVariants: Variants = {

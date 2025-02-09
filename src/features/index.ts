@@ -4,4 +4,5 @@ export { SeminarCardsList } from './SeminarCardsList/SeminarCardsList';
 export {
     seminarsSlice,
     getSeminars,
+    deleteSeminarById,
 } from './SeminarCardsList/api/seminarsReducer';
