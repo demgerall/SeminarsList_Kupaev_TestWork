@@ -1,0 +1,25 @@
+@use '@/app/styles/mixins/fontMixins' as mixins;
+
+.textareaBlock {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 4px;
+
+    label {
+        @include mixins.text-label;
+    }
+
+    textarea {
+        padding: 12px;
+
+        border-radius: 10px;
+        border: 2px solid black;
+
+        @include mixins.text-label;
+
+        resize: none;
+
+        &::placeholder {
+        }
+    }
+}

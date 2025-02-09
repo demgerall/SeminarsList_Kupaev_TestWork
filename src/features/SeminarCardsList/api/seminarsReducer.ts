@@ -31,6 +31,22 @@ export const deleteSeminarById = createAsyncThunk(
     },
 );
 
+export const editSeminarById = createAsyncThunk(
+    'seminars/editSeminarById',
+    async (seminar: seminarType, thunkApi) => {
+        try {
+            const response = await axios.put(
+                `http://localhost:3000/seminars/${seminar.id}`,
+                seminar,
+            );
+            return response.data;
+        } catch (e) {
+            console.error(e);
+            return e;
+        }
+    },
+);
+
 interface StateSchema {
     seminars: Array<seminarType>;
     isLoading: boolean;
@@ -73,6 +89,23 @@ export const seminarsSlice = createSlice({
                 });
             })
             .addCase(deleteSeminarById.rejected, state => {
+                state.isLoading = false;
+                state.isSuccess = false;
+            })
+            .addCase(editSeminarById.pending, state => {
+                state.isLoading = true;
+                state.isSuccess = false;
+            })
+            .addCase(editSeminarById.fulfilled, (state, action) => {
+                state.seminars = state.seminars.map(item => {
+                    return item.id === action.payload.id
+                        ? action.payload
+                        : item;
+                });
+                state.isLoading = false;
+                state.isSuccess = true;
+            })
+            .addCase(editSeminarById.rejected, state => {
                 state.isLoading = false;
                 state.isSuccess = false;
             });

@@ -4,5 +4,5 @@ export type seminarType = {
     description: string;
     date: string;
     time: string;
-    photoURL: string;
+    photo: string;
 };
