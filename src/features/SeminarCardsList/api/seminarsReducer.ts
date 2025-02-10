@@ -13,7 +13,7 @@ export const getSeminars = createAsyncThunk(
     async (__, thunkApi) => {
         try {
             const response = await axios.get(
-                '/SeminarsList_Kupaev_TestWork/data/seminars.json',
+                '/SeminarsList_Kupaev_TestWork/data/seminars_deployExample.json',
             );
             return response.data;
         } catch (error) {
