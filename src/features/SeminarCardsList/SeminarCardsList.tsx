@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { getSeminars } from '@/features';
 import { SeminarCard } from '@/entities';
+import { ErrorBlock } from '@/shared/ui/Error';
 import { useAppDispatch, useAppSelector } from '@/shared/libs/hooks';
 
 import styles from './SeminarCardsList.module.scss';
@@ -18,13 +19,12 @@ export const SeminarCardsList = (props: SeminarCardsListProps) => {
 
     const dispatch = useAppDispatch();
 
-    const { seminars, isLoading } = useAppSelector(({ seminars }) => seminars);
+    const { seminars, isLoading, isLoadingSuccess, errMessage } =
+        useAppSelector(({ seminars }) => seminars);
 
     useEffect(() => {
         dispatch(getSeminars());
     }, [dispatch]);
-
-    console.log(seminars);
 
     const cardsAnimationVariants: Variants = {
         hidden: {
@@ -45,17 +45,21 @@ export const SeminarCardsList = (props: SeminarCardsListProps) => {
             animate="visible"
             viewport={{ amount: 0.2, once: true }}
         >
-            {seminars.map((seminar, index) => {
-                return (
-                    <motion.li
-                        key={index}
-                        variants={cardsAnimationVariants}
-                        custom={index + 4}
-                    >
-                        <SeminarCard seminar={seminar} />
-                    </motion.li>
-                );
-            })}
+            {isLoadingSuccess ? (
+                seminars.map((seminar, index) => {
+                    return (
+                        <motion.li
+                            key={index}
+                            variants={cardsAnimationVariants}
+                            custom={index + 4}
+                        >
+                            <SeminarCard seminar={seminar} />
+                        </motion.li>
+                    );
+                })
+            ) : (
+                <ErrorBlock errorMessage={errMessage} />
+            )}
         </motion.ul>
     );
 };

@@ -3,8 +3,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
 
-import { deleteSeminarById, editSeminarById, Form } from '@/features';
+import { deleteSeminarById, editSeminarById } from '@/features';
 import { Modal } from '@/shared/ui/Modal';
+import { Form } from '@/shared/ui/Form';
 import { Button } from '@/shared/ui/Buttons';
 import { Input } from '@/shared/ui/Input';
 import { Textarea } from '@/shared/ui/Textarea';

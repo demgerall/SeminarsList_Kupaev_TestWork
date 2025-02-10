@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+    createAsyncThunk,
+    createSlice,
+    SerializedError,
+} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import { seminarType } from '@/shared/libs/types';
@@ -12,7 +16,7 @@ export const getSeminars = createAsyncThunk(
             return response.data;
         } catch (error) {
             console.log(error);
-            return error;
+            throw error;
         }
     },
 );
@@ -24,9 +28,9 @@ export const deleteSeminarById = createAsyncThunk(
         try {
             await axios.delete(`http://localhost:3000/seminars/${id}`);
             return id;
-        } catch (e) {
-            console.error(e);
-            return e;
+        } catch (error) {
+            console.error(error);
+            throw error;
         }
     },
 );
@@ -40,9 +44,9 @@ export const editSeminarById = createAsyncThunk(
                 seminar,
             );
             return response.data;
-        } catch (e) {
-            console.error(e);
-            return e;
+        } catch (error) {
+            console.error(error);
+            throw error;
         }
     },
 );
@@ -50,13 +54,17 @@ export const editSeminarById = createAsyncThunk(
 interface StateSchema {
     seminars: Array<seminarType>;
     isLoading: boolean;
-    isSuccess: boolean;
+    isLoadingSuccess: boolean;
+    isActionSuccess: boolean;
+    errMessage: SerializedError | undefined;
 }
 
 const initialState: StateSchema = {
     seminars: [],
     isLoading: false,
-    isSuccess: false,
+    isLoadingSuccess: false,
+    isActionSuccess: false,
+    errMessage: undefined,
 };
 
 export const seminarsSlice = createSlice({
@@ -67,34 +75,37 @@ export const seminarsSlice = createSlice({
         builder
             .addCase(getSeminars.pending, state => {
                 state.isLoading = true;
+                state.isLoadingSuccess = false;
             })
             .addCase(getSeminars.fulfilled, (state, action) => {
                 state.seminars = action.payload;
                 state.isLoading = false;
-                state.isSuccess = true;
+                state.isLoadingSuccess = true;
             })
-            .addCase(getSeminars.rejected, state => {
+            .addCase(getSeminars.rejected, (state, action) => {
                 state.isLoading = false;
-                state.isSuccess = false;
+                state.isLoadingSuccess = false;
+                state.errMessage = action.error;
             })
             .addCase(deleteSeminarById.pending, state => {
                 state.isLoading = true;
-                state.isSuccess = false;
+                state.isActionSuccess = false;
             })
             .addCase(deleteSeminarById.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.isSuccess = true;
+                state.isActionSuccess = true;
                 state.seminars = state.seminars.filter(item => {
                     return item.id !== action.payload;
                 });
             })
-            .addCase(deleteSeminarById.rejected, state => {
+            .addCase(deleteSeminarById.rejected, (state, action) => {
                 state.isLoading = false;
-                state.isSuccess = false;
+                state.isActionSuccess = false;
+                state.errMessage = action.error;
             })
             .addCase(editSeminarById.pending, state => {
                 state.isLoading = true;
-                state.isSuccess = false;
+                state.isActionSuccess = false;
             })
             .addCase(editSeminarById.fulfilled, (state, action) => {
                 state.seminars = state.seminars.map(item => {
@@ -103,11 +114,12 @@ export const seminarsSlice = createSlice({
                         : item;
                 });
                 state.isLoading = false;
-                state.isSuccess = true;
+                state.isActionSuccess = true;
             })
-            .addCase(editSeminarById.rejected, state => {
+            .addCase(editSeminarById.rejected, (state, action) => {
                 state.isLoading = false;
-                state.isSuccess = false;
+                state.isActionSuccess = false;
+                state.errMessage = action.error;
             });
     },
 });
