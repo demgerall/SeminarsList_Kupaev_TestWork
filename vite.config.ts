@@ -4,6 +4,7 @@ import svgr from 'vite-plugin-svgr';
 import { resolve } from 'path';
 
 export default defineConfig({
+    base: '/SeminarsList_Kupaev_TestWork/',
     plugins: [
         react(),
         svgr({
