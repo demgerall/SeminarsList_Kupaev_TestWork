@@ -17,7 +17,7 @@ export const CircleChip = (props: CircleChipProps) => {
         <div className={classNames(styles.circleChip, [className])}>
             <img
                 className={styles.img}
-                src={`/icons/${tool}.svg`}
+                src={`/SeminarsList_Kupaev_TestWork/data/icons/${tool}.svg`}
                 alt={tool}
                 title={tool}
                 draggable={false}

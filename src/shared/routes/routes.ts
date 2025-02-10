@@ -1,3 +1,3 @@
 export const ROUTES = {
-    HOME: '/',
+    HOME: '/SeminarsList_Kupaev_TestWork/',
 };

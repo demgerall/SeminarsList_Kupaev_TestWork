@@ -12,7 +12,9 @@ export const getSeminars = createAsyncThunk(
     'seminars/getSeminars',
     async (__, thunkApi) => {
         try {
-            const response = await axios.get('http://localhost:3000/seminars');
+            const response = await axios.get(
+                '/SeminarsList_Kupaev_TestWork/data/seminars.json',
+            );
             return response.data;
         } catch (error) {
             console.log(error);
@@ -26,7 +28,9 @@ export const deleteSeminarById = createAsyncThunk(
     'seminars/deleteSeminarsById',
     async (id: number, thunkApi) => {
         try {
-            await axios.delete(`http://localhost:3000/seminars/${id}`);
+            await axios.delete(
+                `/SeminarsList_Kupaev_TestWork/data/seminars.json/${id}`,
+            );
             return id;
         } catch (error) {
             console.error(error);
@@ -40,7 +44,7 @@ export const editSeminarById = createAsyncThunk(
     async (seminar: seminarType, thunkApi) => {
         try {
             const response = await axios.put(
-                `http://localhost:3000/seminars/${seminar.id}`,
+                `/SeminarsList_Kupaev_TestWork/data/seminars.json/${seminar.id}`,
                 seminar,
             );
             return response.data;

@@ -36,7 +36,11 @@ export const Header = (props: HeaderProps) => {
                 pageScrolled ? styles.header__scrolled : '',
             )}
         >
-            <HashLink smooth to={'/#about'} className={styles.header_logo_link}>
+            <HashLink
+                smooth
+                to={'/SeminarsList_Kupaev_TestWork/#about'}
+                className={styles.header_logo_link}
+            >
                 <span
                     className={classNames(
                         styles.header_logo_link,
